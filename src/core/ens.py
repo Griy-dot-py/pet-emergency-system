@@ -15,7 +15,9 @@ class ENS:
         return await self.__db.add_group(group)
 
     async def notify_group(self, group_id: int) -> None:
-        group, members = await self.__db.get_group(group_id)
-        for member in members:
-            for contact in member.contacts:
-                await self.__notificator(contact, group.message)
+        result = await self.__db.get_group(group_id)
+        if result is not None:
+            group, members = result
+            for member in members:
+                for contact in member.contacts:
+                    await self.__notificator(contact, group.message)
