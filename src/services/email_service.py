@@ -1,16 +1,16 @@
 from dataclasses import dataclass
-
-import aiosmtplib
 from email.message import EmailMessage
 
-from notificator import NotificationService, NotificationEvent
+import aiosmtplib
+
+from notificator import NotificationEvent, NotificationService
 
 
 @dataclass
-class SMTPService(NotificationService):
+class SMTPEmailService(NotificationService):
     host: str
     port: int
-    address: str
+    email_address: str
 
     async def __call__(self, event: NotificationEvent):
         message = EmailMessage()
@@ -18,5 +18,5 @@ class SMTPService(NotificationService):
         message["To"] = event.address
         message["Subject"] = "Notification"
         message.set_content(event.message)
-        
+
         await aiosmtplib.send(message, hostname=self.host, port=self.port)

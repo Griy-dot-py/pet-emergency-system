@@ -1,5 +1,4 @@
-from . import models
+from . import models, tables
 from .db import SQLAlchemyDB
-from . import tables
 
 __all__ = ["models", "SQLAlchemyDB", "tables"]
