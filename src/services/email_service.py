@@ -14,7 +14,7 @@ class SMTPEmailService(NotificationService):
 
     async def __call__(self, event: NotificationEvent):
         message = EmailMessage()
-        message["From"] = self.address
+        message["From"] = self.email_address
         message["To"] = event.address
         message["Subject"] = "Notification"
         message.set_content(event.message)

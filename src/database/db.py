@@ -1,5 +1,6 @@
 from dataclasses import asdict
 from itertools import chain
+from typing import Iterable
 
 from sqlalchemy import insert
 from sqlalchemy.ext.asyncio import AsyncEngine, async_sessionmaker
@@ -15,7 +16,7 @@ class SQLAlchemyDB(Database):
     def __init__(self, engine: AsyncEngine):
         self.__sessionmaker = async_sessionmaker(bind=engine)
 
-    async def add_users(self, users: list[User]) -> list[int]:
+    async def add_users(self, users: Iterable[User]) -> list[int]:
         async with self.__sessionmaker() as session:
             async with session.begin():
                 user_models = [models.User(name=user.name) for user in users]
