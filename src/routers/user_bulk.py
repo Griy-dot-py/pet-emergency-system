@@ -14,7 +14,8 @@ class UserBulkRouter(CustomRouter):
         self.__router.add_route("/xlsx", self.post_xlsx, methods=["POST"])
 
     @abstractmethod
-    async def post_csv(self, file: UploadFile) -> list[int]: ...
+    async def post_csv(self, file: UploadFile) -> list[int]:
+        content = await file.read()
 
     @abstractmethod
     async def post_xlsx(self, file: UploadFile) -> list[int]: ...

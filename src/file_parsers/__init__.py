@@ -1,4 +1,3 @@
-from .user import _UserFileParser
-from .user_csv import UserCSVParser
+from . import user
 
-__all__ = ["_UserFileParser", "UserCSVParser"]
+__all__ = ["user"]
