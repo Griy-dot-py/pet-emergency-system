@@ -2,9 +2,10 @@ from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
 from email.message import EmailMessage
 
+from notificator import NotificationEvent, NotificationService
+
 # import aiosmtplib
 
-from notificator import NotificationEvent, NotificationService
 
 
 @dataclass
