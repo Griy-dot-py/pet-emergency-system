@@ -1,22 +1,25 @@
+from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
 from email.message import EmailMessage
 
-import aiosmtplib
+# import aiosmtplib
 
 from notificator import NotificationEvent, NotificationService
 
 
 @dataclass
 class SMTPEmailService(NotificationService):
-    host: str
-    port: int
-    email_address: str
+    # host: str
+    # port: int
+    # email_address: str
+    sender: Callable[[EmailMessage], Awaitable[None]]
 
     async def __call__(self, event: NotificationEvent):
         message = EmailMessage()
-        message["From"] = self.email_address
+        # message["From"] = self.email_address
         message["To"] = event.address
         message["Subject"] = "Notification"
         message.set_content(event.message)
 
-        await aiosmtplib.send(message, hostname=self.host, port=self.port)
+        await self.sender(message)
+        # await aiosmtplib.send(message, hostname=self.host, port=self.port)
