@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from fastapi import APIRouter
@@ -9,10 +9,7 @@ from core import ENS
 @dataclass
 class CustomRouter(ABC):
     core: ENS
-    prefix: str
+    fastapi_router: APIRouter
 
-    def compile(self) -> APIRouter:
-        return self.__router
-
-    def __init__(self):
-        self.__router = APIRouter(self.prefix)
+    @abstractmethod
+    def compile(self) -> None: ...

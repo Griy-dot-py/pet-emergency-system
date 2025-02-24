@@ -2,9 +2,7 @@ from .cutom import CustomRouter
 
 
 class NotificationRouter(CustomRouter):
-    prefix = "/notify"
-
-    def __init__(self):
+    def compile(self):
         super().__init__()
         self.__router.add_route("", self.post, methods=["POST"])
 
