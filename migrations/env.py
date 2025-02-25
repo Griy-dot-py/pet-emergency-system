@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 
 from alembic import context
 
-from config.db import DbSettings
+from config import settings
 from database import models
 
 # this is the Alembic Config object, which provides
@@ -25,7 +25,6 @@ if config.config_file_name is not None:
 target_metadata = models.Base.metadata
 SQLA_PATTERN = "{dialect}+{driver}://{user}:{password}@{host}:{port}/{db}"
 
-settings = DbSettings()
 url = SQLA_PATTERN.format(
     dialect=settings.DB_DIALECT,
     driver=settings.DB_MIGRATION_DRIVER,

@@ -3,9 +3,7 @@ from email.message import EmailMessage
 import aiosmtplib
 
 import services
-from config import SMTPSettings
-
-config = SMTPSettings()
+from config import settings as config
 
 
 async def send(message: EmailMessage):

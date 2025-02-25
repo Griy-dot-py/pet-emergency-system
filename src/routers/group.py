@@ -6,7 +6,7 @@ from .schemas import GroupSchema
 
 class GroupRouter(CustomRouter):
     def compile(self):
-        self.__router.add_route("", self.post, methods=["POST"])
+        self.fastapi_router.add_route(self.fastapi_router.prefix, self.post, methods=["POST"])
 
     async def post(self, body: GroupSchema) -> int:
         new = Group(**body.model_dump())

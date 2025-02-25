@@ -2,6 +2,6 @@ from fastapi import FastAPI
 
 from .routers import router_list
 
-api = FastAPI()
+app = FastAPI()
 for router in router_list:
-    api.include_router(router.fastapi_router)
+    app.include_router(router.fastapi_router)

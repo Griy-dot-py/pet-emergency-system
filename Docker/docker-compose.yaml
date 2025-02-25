@@ -1,0 +1,28 @@
+version: "3"
+services:
+
+  loadbalancer:
+    build:
+      context: ".."
+      dockerfile: Docker/loadbalancer.Dockerfile
+    ports:
+    - "80:80"
+    depends_on:
+    - api
+  
+  api:
+    restart: always
+    build:
+      context: ".."
+      dockerfile: Docker/api.Dockerfile
+    depends_on:
+    - database
+  
+  database:
+    image: postgres:14.12
+    environment:
+    - POSTGRES_DB=${DB_NAME}
+    - POSTGRES_USER=${DB_USER}
+    - POSTGRES_PASSWORD=${DB_PASSWORD}
+    # ports:
+    # - 5432:5432

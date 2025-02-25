@@ -1,11 +1,10 @@
 from sqlalchemy.ext.asyncio import create_async_engine
 
-from config import DbSettings
+from config import settings as config
 from database import SQLAlchemyDB
 
 SQLA_PATTERN = "{dialect}+{driver}://{user}:{password}@{host}:{port}/{db}"
 
-config = DbSettings()
 url = SQLA_PATTERN.format(
     dialect=config.DB_DIALECT,
     driver=config.DB_DRIVER,
