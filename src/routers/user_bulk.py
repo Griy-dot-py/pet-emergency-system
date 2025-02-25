@@ -9,9 +9,8 @@ from .cutom import CustomRouter
 
 class UserBulkRouter(CustomRouter):
     def compile(self):
-        self.fastapi_router.add_route("/csv", self.post_csv, methods=["POST"])
-        self.fastapi_router.add_route("/xlsx", self.post_excel, methods=["POST"])
-
+        self.fastapi_router.post("/csv")(self.post_csv)
+        self.fastapi_router.post("/excel")(self.post_excel)
     async def post_csv(self, file: Annotated[bytes, File()]) -> list[int]:
         parser = user.parse_csv_bytes(file)
         return await self.core.add_users(parser)
